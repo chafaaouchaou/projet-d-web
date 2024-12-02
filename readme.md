@@ -1,10 +1,9 @@
-```markdown
-# Projet CruciWeb
+---
 
-## Structure du projet
-
+## Structure du Projet
 
 ```
+
 htdocs/
 ├── api/
 │   ├── controllers/
