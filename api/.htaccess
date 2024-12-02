@@ -1,0 +1,7 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Redirect all non-existing files and directories to routes.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ routes.php [L,QSA]
