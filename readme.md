@@ -87,10 +87,7 @@ Ce dossier contient le front-end, organisé par pages.
   - **`assets/`** : Contient les ressources spécifiques à cette page (CSS, images, etc.).
 
 - **`assets/`** :  
-  Contient des ressources globales comme des images ou des fichiers partagés entre plusieurs pages.
-
-- **`global.css`** :  
-  Fichier de styles CSS global, utilisé pour définir des styles communs à toutes les pages.
+  Contient des ressources spécifiques a la page principale.
 
 - **`index.html`** :  
   Page principale servant de point d'entrée au front-end.
@@ -98,40 +95,34 @@ Ce dossier contient le front-end, organisé par pages.
 ---
 
 #### **4. Fichiers supplémentaires :**
-- **`index.html`** (racine) : Page d'accueil principale du projet (front-end global).
-- **`README.md`** : Ce fichier, expliquant la structure et le fonctionnement du projet.
+- **`index.html`** (racine) : Elle ne sera pas utilisé.
+- **`global.css`** : Fichier de styles CSS global, utilisé pour définir des styles communs à toutes les pages.
 
 ---
 
 ## Notes importantes :
 
-1. **Configuration Apache2 :**
-   - Il pourrait être nécessaire de réaliser quelques configurations supplémentaires au niveau d'Apache2 pour optimiser les performances du serveur.
 
-2. **Améliorations possibles :**
-   - Revoir les TP web pour améliorer la gestion des requêtes HTTP et apporter des optimisations au projet.
+1. **Améliorations possibles :**
+   - Revoir les TP web pour améliorer la gestion des requêtes HTTP.
 
 ---
 
 ## Utilisation :
 
-1. **Déploiement backend (API)** :
-   - Déployer le dossier `api/` dans le répertoire `htdocs` d'Apache.
-   - S'assurer que le module `mod_rewrite` d'Apache est activé pour le fonctionnement correct des routes.
 
 2. **Déploiement front-end (CruciWeb)** :
    - Déployer le dossier `CruciWeb/` dans le répertoire `htdocs` d'Apache.
-   - Accéder aux différentes pages via **http://localhost/CruciWeb/home/** ou **http://localhost/CruciWeb/about/**.
+   - Accéder aux différentes pages via **http://localhost/CruciWeb/** ou **http://localhost/CruciWeb/about/** ....
 
 3. **Test de l'API** :
    - Accéder aux routes de l'API, par exemple :
      - **http://localhost/api/message** pour récupérer un message.
-     - **http://localhost/api/routes.php** pour tester directement le fichier routes.
 
 ---
 
 ### Exemple de résultat attendu :
-- Accès à **http://localhost/CruciWeb/home/** : Charge la page d'accueil.
+- Accès à **http://localhost/CruciWeb/** : Charge la page d'accueil.
 - Accès à **http://localhost/api/message** : Retourne une réponse JSON comme :
   ```json
   {
@@ -141,5 +132,3 @@ Ce dossier contient le front-end, organisé par pages.
 
 ---
 ```
-
-Ce fichier inclut désormais l'arborescence complète et des explications détaillées pour chaque partie du projet.
