@@ -7,5 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     gamesContainer.addEventListener("click", (event) => gameController.handleGameClick(event));
 
+    const filterForm = document.getElementById("filterForm");
+    console.log("Formulaire de filtre : ", filterForm);
+    filterForm.addEventListener("submit", (event) => gameController.handleFilterGames(event));
+
     gameController.loadGames();
 });
