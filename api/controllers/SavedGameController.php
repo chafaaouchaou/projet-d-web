@@ -20,7 +20,7 @@
             return $_SESSION['user_id'];
         }
 
-        public function saveGame($userId, $gridId, $solutionPartielle = null){
+        public function saveGame($gridId, $solutionPartielle = null){
             try{
                 $userId = $this->estConecte();
                 $this->savedGameModel->saveGame($userId, $gridId,$solutionPartielle);
@@ -51,7 +51,7 @@
         }
     
 
-        public function getSavedGames($userId)
+        public function getSavedGames()
         {
             $userId = $this->estConecte();
             $savedGames = $this->savedGameModel->getSavedGames($userId);
