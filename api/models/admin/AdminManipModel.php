@@ -28,23 +28,41 @@ class AdminManipModel {
     }
 
     public function suppressionUser($id){
+        //faut d'abord supprimer la grille qu'il a crée s'il en a crée
+
+        $requeteSuppressionSavedGrids = "DELETE FROM saved_grids WHERE id_user = ?";
+        $stm = $this->db->prepare($requeteSuppressionSavedGrids);
+        $stm->execute([$id]);
+
+
+        $requeteSuppressionGrilles = "DELETE FROM grids WHERE id_utilisateur = ?";
+        $stm = $this->db->prepare($requeteSuppressionGrilles);
+        $stm->execute([$id]);
+
         $requeteSuppressionUser = "DELETE FROM users WHERE id = ?";
         try{
             $stm = $this->db->prepare($requeteSuppressionUser);
             $stm->execute([$id]);
             return true;
         }catch(PDOException $e){
+            error_log("Erreur PDO : " . $e->getMessage());
             return false;
         }
     }
 
     public function suppressionGame($id){
+        //pour pouvroir supprimer la grille faut d'abord supprimer les grilles sauvgarder s'il y en a
+        $requeteSuppressionSavedGrids = "DELETE FROM saved_grids WHERE id_grid = ?";
+        $stm = $this->db->prepare($requeteSuppressionSavedGrids);
+        $stm->execute([$id]);
+        
         $requeteSuppressionGame = "DELETE FROM grids WHERE id = ?";
         try{
             $stm = $this->db->prepare($requeteSuppressionGame);
             $stm->execute([$id]);
             return true;
         }catch(PDOException $e){
+            error_log("Erreur PDO : " . $e->getMessage());
             return false;
         }
     }

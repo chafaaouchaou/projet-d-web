@@ -21,7 +21,7 @@
         }
 
         public function getUsers(){
-            $requeteRecuperationUsers = "SELECT username,email FROM users";
+            $requeteRecuperationUsers = "SELECT username,email FROM users WHERE role = 'user'";
             $stm = $this->db->prepare($requeteRecuperationUsers);
             $stm->execute();
             $resultat = $stm->fetchAll(PDO::FETCH_ASSOC);

@@ -82,19 +82,21 @@ switch ($route) {
         $controller->addGrid($data);
         break;
     
-        case '/saveGame':
-            $controller = new SavedGameController($db);
-            $data = json_decode(file_get_contents("php://input"), true); // Récupérer les données JSON
-            if (!$data) {
-                echo json_encode(['erreur' => 'Aucune donnée reçue pour /saveGame']);
-                return;
-            }
-            $controller->saveGame(
-                $data['userId'], 
-                $data['gridId'], 
-                $data['solutionPartielle'] ?? null
-            );
-            break;
+          
+
+            case '/saveGame':
+                $controller = new SavedGameController($db);
+                $gridId = $_GET['gridId'] ?? null;
+                $data = json_decode(file_get_contents("php://input"), true);
+                if (!$gridId) {
+                    echo json_encode(['erreur' => 'Aucun ID de grille fourni']);
+                    return;
+                }
+                $controller->saveGame(
+                    $gridId,
+                    $data['solutionPartielle'] ?? null
+                );
+                break;
 
         case (preg_match('/^\/getSavedGame\/(\d+)$/', $route, $matches) ? true : false):
             $savedGridId = $matches[1];  
@@ -102,12 +104,11 @@ switch ($route) {
             $controller->getSavedGame($savedGridId);
             break;
     
-        case (preg_match('/^\/getSavedGames\/(\d+)$/', $route, $matches) ? true : false):
-            $userId = $matches[1];  
+        case '/getSavedGames':
             $controller = new SavedGameController($db);
-            $controller->getSavedGames($userId);  
+            $controller->getSavedGames();  
             break;
-
+        
         case (preg_match('/^\/deleteSaveGame\/(\d+)$/', $route, $matches) ? true : false):
             $id = $matches[1];
             $controller = new SavedGameController($db);
