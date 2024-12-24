@@ -21,6 +21,7 @@ class GameView {
             gameDiv.appendChild(gameDescription);
             this.container.appendChild(gameDiv);
         });
+
     }
 
     showError(message) {
