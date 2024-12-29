@@ -2,9 +2,9 @@
 
 class Database{
     private $host = 'localhost';
-    private $username = 'root'; // private $username = 'projet'
-    private $dbname = 'projet';
-    private $mdp = '';
+    private $username = 'cruciwebuser'; // private $username = 'projet'
+    private $dbname = 'cruciweb';
+    private $mdp = 'Fleshed7-Starring0-Catalyst5-Lining0-Enduring3';
     public $pdo;
 
     public function __construct()
