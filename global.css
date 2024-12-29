@@ -1,3 +1,44 @@
-body{
-    background-color: rgb(218, 218, 218);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    color: #ffffff;
+
+}
+
+
+*,*::after,*::before{
+    box-sizing: border-box; 
+
+}
+
+/* Topograthie */
+
+html{
+    font-size: 62.5%;
+}
+
+
+
+
+nav {
+    background-color: transparent;
+    padding: 10px 20px;
+    text-align: center;
+    background: #202020;
+    margin: 1rem auto;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #9b9b9b;
+    padding: 5px 15px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #ffffff;
 }

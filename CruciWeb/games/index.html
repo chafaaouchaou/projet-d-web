@@ -4,37 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeux</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styless.css">
+    <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="../../normalize.css">
 </head>
 <body>
-    <header>
-        <h1>Games List</h1>
-        <button id="logoutBtn">Déconnexion</button>
-    </header>
-    <main>
-        <form id="filterForm">
-            <label for="niveau_difficulte">Niveau de difficulté:</label>
-            <select id="niveau_difficulte">
-                <option value="">Tous</option>
-                <option value="débutant">Débutant</option>
-                <option value="intermédiaire">Intermédiaire</option>
-                <option value="expert">Expert</option>
-            </select>
         
-            <label for="date_de_creation">Date de création:</label>
-            <input type="date" id="date_de_creation">
-            
-            <button type="submit">Filtrer</button>
-        </form>
+        <nav>
+            <a href="/projet-d-web/CruciWeb/games">New game</a>
+            <a href="/projet-d-web/CruciWeb/mygames">My games</a>
+            <a href="/projet-d-web/CruciWeb/profile">Profile</a>
+            <a href="/projet-d-web/CruciWeb/mygrids">My grids</a>
+        </nav>
+
+        <main>
+            <!-- Search Bar and Filters -->
+            <div class="search-filter-container">
+                <div class="search-div">
+                    <img src="assets/images/search.png" alt="Search Icon" class="search-icon">
+                    <input type="text" id="search-bar" placeholder="Search game" />
+                </div>
+                <div class="filter-buttons">
+                    <div class="filter-group">
+                        <label for="level-select" class="filter-label">Level:</label>
+                        <select id="level-select" class="filter-select">
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date-select" class="filter-label">Date:</label>
+                        <select id="date-select" class="filter-select">
+                            <option value="Today">Today</option>
+                            <option value="Last Week">Last Week</option>
+                            <option value="Last Month">Last Month</option>
+                            <option value="All Time">All Time</option>
+                        </select>
+                    </div>
+                </div>
         
-        <div id="games-container">Loading...</div>
-        <script src="assets/js/model.js"></script>
-        <script src="assets/js/view.js"></script>
-        <script src="assets/js/controller.js"></script>
-        <script src="assets/js/app.js"></script>
-    </main>
-    <footer>
-        <p>&copy; 2024 Games Inc.</p>
-    </footer>
+            </div>
+            <div id="games-container">Loading...</div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Games Inc.</p>
+        </footer>
+    <script src="assets/js/games.js?v=2"></script>
 </body>
 </html>
