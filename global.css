@@ -42,3 +42,7 @@ nav a {
 nav a:hover {
     color: #ffffff;
 }
+
+nav .hidden {
+    display: none;
+}

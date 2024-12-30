@@ -80,7 +80,9 @@ class GameController {
             );
     
             if ($resultat) {
-                echo json_encode(['succes' => 'Grille ajoutée avec succès.']);
+                echo json_encode(['succes' => 'Grille ajoutée avec succès.',
+                                    'result'=> $resultat
+            ]);
             } else {
                 throw new Exception('Une erreur s\'est produite lors de l\'ajout de la grille.');
             }

@@ -1,17 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const contentDiv = document.getElementById('content');
-    console.log("page 0 page loaded!");
+   // Redirect the user to the /games page
+window.location.href = '/projet-d-web/CruciWeb/games';
 
-
-    fetch('../api/message')
-        .then(response => response.json())
-        .then(data => {
-            contentDiv.innerHTML = `<p>${data.message}</p>`;
-            
-        })
-
-        .catch(error => {
-            console.log('error: not working');
-            
-        });
 });

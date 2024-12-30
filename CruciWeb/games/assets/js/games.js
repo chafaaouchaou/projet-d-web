@@ -1,7 +1,12 @@
+
+import API_BASE_URL from '../../../config.js';
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const gamesContainer = document.getElementById("games-container");
 
-    fetch("http://localhost/projet-d-web/api/games")
+    fetch(`${API_BASE_URL}/games`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Network response was not ok: " + response.statusText);

@@ -8,17 +8,26 @@ class User{
         $this->db = $db;
     }
 
-    //Inscription
-    public function register($username,$email,$password)
+    public function register($username, $email, $password)
     {
-        $passwordHash = password_hash($password,PASSWORD_DEFAULT);
-        $query = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES(?,?,?,'user') ");
-        $query->bindParam(1,$username);
-        $query->bindParam(2,$email);
-        $query->bindParam(3,$passwordHash);
-
-        return $query->execute();
-
+        try {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $query = $this->db->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
+            $query->bindParam(1, $username);
+            $query->bindParam(2, $email);
+            $query->bindParam(3, $passwordHash);
+    
+            if ($query->execute()) {
+                return true;
+            } else {
+                // Afficher les erreurs SQL
+                print_r("ca ne marche pas");
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+            return false;
+        }
     }
 
     //Connexion
