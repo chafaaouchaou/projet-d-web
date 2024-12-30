@@ -1,11 +1,3 @@
-// document.querySelector('form').addEventListener('submit', (event) => {
-//     event.preventDefault(); // Prevent the form from submitting
-//     const inputs = document.querySelectorAll('input');
-//     let values = Array.from(inputs).map(input => input.value);
-//     console.log(`Nom: ${values[0]}, Prénom: ${values[1]}, Email: ${values[2]}, Mot de passe: ${values[3]}`);
-// });
-
-
 document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 

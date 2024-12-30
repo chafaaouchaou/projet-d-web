@@ -29,7 +29,6 @@ class AdminManipModel {
 
     public function suppressionUser($id){
         //faut d'abord supprimer la grille qu'il a crée s'il en a crée
-
         $requeteSuppressionSavedGrids = "DELETE FROM saved_grids WHERE id_user = ?";
         $stm = $this->db->prepare($requeteSuppressionSavedGrids);
         $stm->execute([$id]);

@@ -1,4 +1,4 @@
-import API_BASE_URL from '../../../config.js';
+import API_BASE_URL from '../../../../config.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const gameNameInput = document.getElementById('game-name');
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Game data:', gameData);
 
         // Send POST request to create the grid
-        fetch('http://localhost/projet-d-web/api/addGrid', {
+        fetch(`${API_BASE_URL}/addGrid`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

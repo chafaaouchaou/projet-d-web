@@ -1,3 +1,4 @@
+
 // Fonction pour vérifier si un cookie PHPSESSID existe
 function checkSession() {
     // Vérifier si le cookie PHPSESSID est présent

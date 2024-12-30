@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un compte</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="../../global.css?v=1">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../../global.css">
     <link rel="stylesheet" href="../../normalize.css">
-
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
@@ -17,6 +16,7 @@
         <a href="/projet-d-web/CruciWeb/profile">Profile</a>
         <a href="/projet-d-web/CruciWeb/creergrid">Créer Gris</a>
 
+
         <!-- Ces liens seront affichés si l'utilisateur n'est pas connecté -->
         <a href="/projet-d-web/CruciWeb/connection" id="login-link" class="hidden">Login</a>
         <a href="/projet-d-web/CruciWeb/inscription" id="register-link" class="hidden">Register</a>
@@ -24,20 +24,20 @@
         <!-- Ce lien sera affiché si l'utilisateur est connecté -->
         <a href="javascript:void(0);" id="logout-link" class="hidden" onclick="logout();">Logout</a>
     </nav>
+    
+    <div class="profile">
+        <img src="assets/images/avatar.png" alt="">
+        <h1 class="nompr">Ouchaou Chafaa</h1>
+        <p class="bio">this is juste a simpye discription let’s goo </p>
 
-    <div class="form-container">
-        <img src="./assets/images/logo.png.png" alt="Avatar">
-        <h2>Connection</h2>
-        <form >
-            <p class="texte-inputs">Email</p>
-            <input type="email"  required>
-            <p class="texte-inputs">Mot de passe</p>
-            <input type="password"  required>
-            <button type="submit">Connection</button>
-        </form>
-        <small>Vous n’avez pas de compte ? <a href="/CruciWeb/inscription/">Creer votre compte!</a></small>
+        <div class="info">
+            <p>join date : 14/7/2023</p>
+            <p>Contribution : 13</p>
+            <p>Gris résolu : 143</p>
+        </div>
     </div>
-    <script src="assets/js/app.js?v=2"></script>
+
     <script src="../../global.js"></script>
+    
 </body>
 </html>

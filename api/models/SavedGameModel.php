@@ -32,7 +32,7 @@
 
         public function getSavedGame($gridId,$userId){
             $requeteRecuperationDeLaGrille = "SELECT S.id_saved_grids, S.solution_partielle,S.save_date,G.nom, G.nbr_lignes, G.nbr_colonnes, G.def_horizontales, 
-                                              G.def_verticales, G.cases_noire, G.solutions
+                                              G.def_verticales, G.cases_noire, G.solutions, G.id as grid_id
                                               FROM saved_grids S
                                               JOIN grids G ON S.id_grid = G.id
                                               WHERE S.id_saved_grids = ? AND S.id_user = ?";

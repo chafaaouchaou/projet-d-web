@@ -2,9 +2,9 @@ import API_BASE_URL from '../../../../config.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
-    const gameId = params.get("id"); // Récupérer l'ID du jeu à partir de l'URL
+    const savedGameId = params.get("id"); // Récupérer l'ID du jeu sauvegardé à partir de l'URL
 
-    if (!gameId) {
+    if (!savedGameId) {
         console.log("Pas de paramètre 'id' fourni dans l'URL");
         return;
     }
@@ -13,16 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const playerGrid = Array.from({ length: 10 }, () => Array(10).fill('')); // Grille du joueur vide
     const gridContainer = document.getElementById('grid');
     const messageContainer = document.getElementById('message');
-    let rows, cols;
+    let rows, cols, gridId;
 
-    // Récupérer les données du jeu via une API
-    fetch(`${API_BASE_URL}/game/${gameId}`)
+    // Récupérer les données du jeu sauvegardé via une API
+    fetch(`http://localhost/projet-d-web/api/getSavedGame/${savedGameId}`)
         .then(response => response.json())
         .then(data => {
-            const concatenatedGrid = data.concatenatedGrid;
-            rows = data.rows;
-            cols = data.cols;
-            console.log(data);
+            const concatenatedGrid = data.solutions;
+            rows = data.nbr_lignes;
+            cols = data.nbr_colonnes;
+            gridId = data.grid_id; // Utiliser grid_id pour les opérations de sauvegarde
+            const partialSolution = data.solution_partielle.split(',');
 
             // Mettre à jour la taille de la grille (lignes et colonnes) dynamiquement
             gridContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;  // Ajuste le nombre de colonnes
@@ -35,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // Générer et afficher la grille
-            generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer, rows, cols);
-            buildExpressions(data.horizontalDesc, data.verticalDesc);
+            generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer, rows, cols, partialSolution);
+            buildExpressions(data.def_horizontales, data.def_verticales);
         })
         .catch(error => {
             console.error('Erreur:', error);
@@ -54,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector('#save').addEventListener('click', function () {
         const solutionPartielle = playerGrid.map(row => row.join(',')).join(',');
-        
-        fetch(`http://localhost/projet-d-web/api/saveGame?gridId=${gameId}`, {
+
+        fetch(`http://localhost/projet-d-web/api/saveGame?gridId=${gridId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,10 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json())
             .then(data => {
-
                 if (data.succes) {
-                    console.log(solutionPartielle);
-
                     messageContainer.textContent = data.succes;
                 } else {
                     messageContainer.textContent = 'Erreur lors de la sauvegarde de la grille.';
@@ -103,7 +101,7 @@ function buildExpressions(horizontalDesc, verticalDesc) {
 }
 
 // Fonction pour générer et afficher la grille
-function generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer, rows, cols) {
+function generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer, rows, cols, partialSolution) {
     gridContainer.innerHTML = ''; // Vider la grille existante
 
     solutionGrid.forEach((row, rowIndex) => {
@@ -120,6 +118,13 @@ function generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer,
                 input.setAttribute('maxlength', '1');
                 input.dataset.row = rowIndex;
                 input.dataset.col = colIndex;
+
+                // Pré-remplir avec la solution partielle
+                const partialChar = partialSolution[rowIndex * cols + colIndex];
+                if (partialChar && partialChar !== '') {
+                    input.value = partialChar;
+                    playerGrid[rowIndex][colIndex] = partialChar;
+                }
 
                 // Mettre à jour la grille du joueur
                 input.addEventListener('input', (e) => {
@@ -155,8 +160,6 @@ function checkGrid(solutionGrid, playerGrid, messageContainer, rows, cols) {
                     isComplete = false;
                     break;
                 }
-            }else{
-                
             }
         }
     }

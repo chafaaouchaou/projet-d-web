@@ -21,7 +21,7 @@
         }
 
         public function getUsers(){
-            $requeteRecuperationUsers = "SELECT username,email FROM users WHERE role = 'user'";
+            $requeteRecuperationUsers = "SELECT id, username,email FROM users WHERE role = 'user'";
             $stm = $this->db->prepare($requeteRecuperationUsers);
             $stm->execute();
             $resultat = $stm->fetchAll(PDO::FETCH_ASSOC);
@@ -30,7 +30,7 @@
     }
 
         public function getGrids(){
-            $requeteRecuperationGrids = "SELECT description,nom,niveau_difficulte,date_de_creation FROM grids";
+            $requeteRecuperationGrids = "SELECT id,description,nom,niveau_difficulte,date_de_creation FROM grids";
             $stm = $this->db->prepare($requeteRecuperationGrids);
             $stm->execute();
             $resultat = $stm->fetchAll(PDO::FETCH_ASSOC);
