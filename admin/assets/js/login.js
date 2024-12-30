@@ -1,3 +1,6 @@
+import API_BASE_URL from '../../../config.js';
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById('login-form');
     const messageContainer = document.getElementById('message');
@@ -8,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        fetch('http://localhost/projet-d-web/api/admin/login', {
+        fetch(`${API_BASE_URL}/admin/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

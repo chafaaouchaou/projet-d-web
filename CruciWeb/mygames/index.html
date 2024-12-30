@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games List</title>
-    <script defer src="./assets/js/script.js?v=1"></script>
-    <link rel="stylesheet" href="./assets/css/style.css?v=1">
+    <script type="module" src="./assets/js/script.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 
     <link rel="stylesheet" href="../../global.css">
     <link rel="stylesheet" href="../../normalize.css">
@@ -17,6 +17,13 @@
         <a href="/projet-d-web/CruciWeb/profile">Profile</a>
         <a href="/projet-d-web/CruciWeb/creergrid">Créer Gris</a>
 
+
+        <!-- Ces liens seront affichés si l'utilisateur n'est pas connecté -->
+        <a href="/projet-d-web/CruciWeb/connection" id="login-link" class="hidden">Login</a>
+        <a href="/projet-d-web/CruciWeb/inscription" id="register-link" class="hidden">Register</a>
+
+        <!-- Ce lien sera affiché si l'utilisateur est connecté -->
+        <a href="javascript:void(0);" id="logout-link" class="hidden" onclick="logout();">Logout</a>
     </nav>
     <main>
         <header>
@@ -51,5 +58,6 @@
     <footer>
         <p>&copy; 2024 Games Inc.</p>
     </footer>
+<script src="../../global.js" ></script>
 </body>
 </html>

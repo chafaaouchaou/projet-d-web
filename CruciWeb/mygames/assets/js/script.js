@@ -1,8 +1,10 @@
+import API_BASE_URL from '../../../../config.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     const gamesListContainer = document.querySelector(".games-list");
 
     // Fetch saved games from the API
-    fetch("http://localhost/projet-d-web/api/getSavedGames")
+    fetch(`${API_BASE_URL}/getSavedGames`)
         .then(response => response.json())
         .then(games => {
             gamesListContainer.innerHTML = ''; // Clear existing content
@@ -27,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Add click event listener to redirect to game details page
                 gameItem.addEventListener("click", () => {
-                    window.location.href = `http://localhost/projet-d-web/CruciWeb/sgame/?id=${game.id_saved_grids}`;
+                    window.location.href = `/projet-d-web/CruciWeb/sgame/?id=${game.id_saved_grids}`;
                 });
 
                 gamesListContainer.appendChild(gameItem);
@@ -47,9 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error fetching games:', error);
         });
 
-    // Function to delete a game
+    // Function to delete a game____________________________________________
     function deleteGame(gameId) {
-        fetch(`http://localhost/projet-d-web/api/deleteSaveGame/${gameId}`, {
+        fetch(`${API_BASE_URL}/deleteSaveGame/${gameId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

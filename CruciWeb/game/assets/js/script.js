@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('#save').addEventListener('click', function () {
         const solutionPartielle = playerGrid.map(row => row.join(',')).join(',');
         
-        fetch(`http://localhost/projet-d-web/api/saveGame?gridId=${gameId}`, {
+        fetch(`${API_BASE_URL}/saveGame?gridId=${gameId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,10 +1,4 @@
-// document.querySelector('form').addEventListener('submit', (event) => {
-//     event.preventDefault(); // Prevent the form from submitting
-//     const inputs = document.querySelectorAll('input');
-//     let values = Array.from(inputs).map(input => input.value);
-//     console.log(`Mail: ${values[0]}, Mot de  passe: ${values[1]}`);
-// });
-
+import API_BASE_URL from '../../../../config.js';
 
 document.querySelector('form').addEventListener('submit', async (event) => {
     event.preventDefault(); // Empêche le formulaire de se soumettre normalement
@@ -21,7 +15,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
 
     try {
         // Envoi de la requête POST
-        const response = await fetch('http://localhost/projet-d-web/api/login', {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Indique que les données sont en JSON
@@ -40,7 +34,7 @@ document.querySelector('form').addEventListener('submit', async (event) => {
         if (result.succes) {
             console.log(result.succes);
             alert("Connexion réussie : " + result.succes);
-            window.location.href = 'http://localhost/projet-d-web/CruciWeb/';
+            window.location.href = '/projet-d-web/CruciWeb/';
 
             // Redirige vers une autre page si nécessaire
             // window.location.href = "/projet-d-web/dashboard";

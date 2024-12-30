@@ -1,3 +1,6 @@
+import API_BASE_URL from '../../../../config.js';
+
+
 document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault(); // Empêche l'envoi du formulaire par défaut
 
@@ -13,7 +16,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
     };
 
     // Envoyer la requête POST
-    fetch('http://localhost/projet-d-web/api/register', {
+    fetch(`${API_BASE_URL}/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' // Spécifie le format JSON
@@ -29,7 +32,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
     .then(result => {
         // console.log(result); // Affiche le retour dans la console
         alert(result.succes); // Message utilisateur
-        window.location.href = 'http://localhost/projet-d-web/CruciWeb/connection';
+        window.location.href = '/projet-d-web/CruciWeb/connection';
 
     })
     .catch(error => {

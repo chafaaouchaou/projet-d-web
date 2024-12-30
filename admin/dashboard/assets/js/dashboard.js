@@ -1,3 +1,5 @@
+import API_BASE_URL from '../../../../config.js';
+
 document.addEventListener("DOMContentLoaded", function () {
     const usersButton = document.getElementById('users-button');
     const gridsButton = document.getElementById('grids-button');
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
 
             // Effectuer une requête POST pour la déconnexion
-            fetch('http://localhost/projet-d-web/api/logout', {
+            fetch(`${API_BASE_URL}/logout`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.succes) {
                     alert(data.succes); // Afficher un message de succès
                     // Rediriger après la déconnexion
-                    window.location.href = 'http://localhost/projet-d-web/admin/';
+                    window.location.href = '/projet-d-web/admin/';
                 } else {
                     alert('Logout failed');
                 }
@@ -62,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function fetchUsers() {
-        fetch('http://localhost/projet-d-web/api/admin/getUsers')
+        fetch(`${API_BASE_URL}/admin/getUsers`) //----------------------------------------------------------
             .then(response => response.json())
             .then(users => {
                 usersList.innerHTML = '';
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchGrids() {
-        fetch('http://localhost/projet-d-web/api/admin/getGrids')
+        fetch(`${API_BASE_URL}/admin/getGrids`)
             .then(response => response.json())
             .then(grids => {
                 console.log(grids);
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function addUser(username,email, password) {
         console.log(JSON.stringify({username, email, password }));
     
-        fetch('http://localhost/projet-d-web/api/admin/addUser', {
+        fetch(`${API_BASE_URL}/api/admin/addUser`, { //-------------------------------------------
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -148,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function deleteUser(userId) {
-        fetch(`http://localhost/projet-d-web/api/admin/deleteUser/${userId}`, {
+        fetch(`${API_BASE_URL}/admin/deleteUser/${userId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -170,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function deleteGrid(gridId) {
-        fetch(`http://localhost/projet-d-web/api/admin/deleteGame/${gridId}`, {
+        fetch(`${API_BASE_URL}/admin/deleteGame/${gridId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

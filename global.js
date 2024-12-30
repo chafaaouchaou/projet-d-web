@@ -35,7 +35,7 @@ function logout() {
                 // Rediriger après la déconnexion
                 document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + window.location.hostname;
                 document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-                window.location.href = 'http://localhost/projet-d-web/CruciWeb/';
+                window.location.href = '/projet-d-web/CruciWeb/';
             } else {
                 alert('Logout failed');
             }

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let rows, cols, gridId;
 
     // Récupérer les données du jeu sauvegardé via une API
-    fetch(`http://localhost/projet-d-web/api/getSavedGame/${savedGameId}`)
+    fetch(`${API_BASE_URL}/getSavedGame/${savedGameId}`)
         .then(response => response.json())
         .then(data => {
             const concatenatedGrid = data.solutions;
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('#save').addEventListener('click', function () {
         const solutionPartielle = playerGrid.map(row => row.join(',')).join(',');
 
-        fetch(`http://localhost/projet-d-web/api/saveGame?gridId=${gridId}`, {
+        fetch(`${API_BASE_URL}/saveGame?gridId=${gridId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
