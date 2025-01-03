@@ -105,14 +105,29 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
-            alert('Grid created successfully!');
+            if (data.erreur) {
+                // Si un message d'erreur est renvoyé, on affiche l'alerte avec l'erreur
+                alert(data.erreur);
+            } else {
+                // Si aucune erreur, afficher un message de succès
+                alert('Grid created successfully!');
+                window.location.href = '/projet-d-web/CruciWeb/';
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
             alert('Failed to create grid.');
         });
     });
+
+
+    
+    
+
+
+
+
+
 
     function generateGrid(rows, cols, gridContainer) {
         gridContainer.innerHTML = ''; // Clear existing grid
@@ -152,4 +167,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize the grid on page load
     initializeGrid(parseInt(rowsInput.value), parseInt(colsInput.value));
+});
+
+
+
+
+function checkSessionCookie() {
+    let sessionCookie = document.cookie.split(';').some((item) => item.trim().startsWith('PHPSESSID='));
+    return sessionCookie;
+}
+
+// Function to show or hide the modal based on session cookie
+function handleSession() {
+    const modal = document.getElementById('login-modal');
+    const goBackBtn = document.getElementById('go-back-btn');
+
+    if (!checkSessionCookie()) {
+        modal.style.display = 'flex'; // Show modal if no session cookie
+    } else {
+        modal.style.display = 'none'; // Hide modal if session cookie is set
+    }
+
+    // Handle "Go Back" button click
+    goBackBtn.addEventListener('click', function() {
+        window.history.back(); // Go back to the previous page
+    });
+}
+
+// Wait for the DOM to load before checking the session cookie
+document.addEventListener('DOMContentLoaded', function() {
+    handleSession();
 });

@@ -46,15 +46,32 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('#validate').addEventListener('click', function () {
         const isComplete = checkGrid(solutionGrid, playerGrid, messageContainer, rows, cols);
         if (isComplete) {
+            messageContainer.classList.add('succes');
+            messageContainer.classList.remove('error');
             messageContainer.textContent = 'Félicitations, vous avez complété la grille ! 🎉';
         } else {
+            messageContainer.classList.remove('succes');
+            messageContainer.classList.add('error');
+
             messageContainer.textContent = 'La solution n\'est pas encore correcte.';
         }
     });
 
     document.querySelector('#save').addEventListener('click', function () {
-        const solutionPartielle = playerGrid.map(row => row.join(',')).join(',');
+        // Vérifier si le cookie PHPSESSID existe
+        let sessionCookie = document.cookie.split(';').some((item) => item.trim().startsWith('PHPSESSID='));
         
+        if (!sessionCookie) {
+            // Si le cookie n'existe pas, afficher un message d'erreur
+            messageContainer.classList.remove('succes');
+            messageContainer.classList.add('error');
+            messageContainer.textContent = 'Vous devez vous connecter pour sauvegarder votre progression.';
+            return;
+        }
+    
+        // Si le cookie existe, continuer avec la sauvegarde
+        const solutionPartielle = playerGrid.map(row => row.join(',')).join(',');
+    
         fetch(`${API_BASE_URL}/saveGame?gridId=${gameId}`, {
             method: 'POST',
             headers: {
@@ -64,20 +81,25 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json())
             .then(data => {
-
                 if (data.succes) {
                     console.log(solutionPartielle);
-
+                    messageContainer.classList.add('succes');
+                    messageContainer.classList.remove('error');
                     messageContainer.textContent = data.succes;
                 } else {
+                    messageContainer.classList.remove('succes');
+                    messageContainer.classList.add('error');
                     messageContainer.textContent = 'Erreur lors de la sauvegarde de la grille.';
                 }
             })
             .catch(error => {
+                messageContainer.classList.remove('succes');
+                messageContainer.classList.add('error');
                 console.error('Erreur:', error);
                 messageContainer.textContent = 'Erreur lors de la sauvegarde de la grille.';
             });
     });
+    
 });
 
 // Fonction pour construire les expressions horizontales et verticales

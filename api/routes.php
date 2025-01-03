@@ -41,7 +41,7 @@ switch ($route) {
         
     // Nouvelle route dynamique pour le jeu
     case (preg_match('/^\/game\/(\d+)$/', $route, $matches) ? true : false):
-        $gameId = $matches[1]; // Récupérer l'ID du jeu (ici, '34')
+        $gameId = $matches[1]; 
         $controller = new GameController($db);
         $controller->getGame($gameId);
         break;

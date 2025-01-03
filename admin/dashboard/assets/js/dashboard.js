@@ -3,7 +3,6 @@ import API_BASE_URL from '../../../../config.js';
 document.addEventListener("DOMContentLoaded", function () {
     const usersButton = document.getElementById('users-button');
     const gridsButton = document.getElementById('grids-button');
-    const addUserButton = document.getElementById('add-user-button');
     const logoutButton = document.getElementById('logout-button');
     const usersSection = document.getElementById('users-section');
     const gridsSection = document.getElementById('grids-section');
@@ -13,31 +12,20 @@ document.addEventListener("DOMContentLoaded", function () {
     usersButton.addEventListener('click', function () {
         usersSection.classList.add('visible');
         gridsSection.classList.remove('visible');
-        addUserButton.classList.remove('hidden');
         fetchUsers();
     });
 
     gridsButton.addEventListener('click', function () {
         gridsSection.classList.add('visible');
         usersSection.classList.remove('visible');
-        addUserButton.classList.add('hidden');
         fetchGrids();
     });
 
-    addUserButton.addEventListener('click', function () {
-        const username = prompt("Enter user username:");
-        const email = prompt("Enter user email:");
-        const password = prompt("Enter user password:");
-        if (email && password) {
-            addUser(username,email, password);
-        }
-    });
 
     logoutButton.addEventListener('click', function logout() {
         if (confirm('Are you sure you want to log out?')) {
             // Suppression du cookie PHPSESSID (ou tout autre cookie de session)
-            document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + window.location.hostname;
-            document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+
 
             // Effectuer une requête POST pour la déconnexion
             fetch(`${API_BASE_URL}/logout`, {
@@ -49,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.succes) {
+                    document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + window.location.hostname;
+                    document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
                     alert(data.succes); // Afficher un message de succès
                     // Rediriger après la déconnexion
                     window.location.href = '/projet-d-web/admin/';
@@ -117,38 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    function addUser(username,email, password) {
-        console.log(JSON.stringify({username, email, password }));
-    
-        fetch(`${API_BASE_URL}/api/admin/addUser`, { //-------------------------------------------
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.succes) {
-                    alert(data.succes);
-                    fetchUsers();
-                } else {
-                    alert('Error adding user.');
-                }
-            })
-            .catch(error => {
-                console.error('Error adding user:', error);
-                alert('Error adding user: ' + error.message);
-            });
-    }
-    
-
-
     function deleteUser(userId) {
         fetch(`${API_BASE_URL}/admin/deleteUser/${userId}`, {
             method: 'POST',
@@ -192,4 +150,72 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error deleting grid:', error);
             });
     }
+
+
+
+function addUser(username, email, password) {
+    fetch(`${API_BASE_URL}/admin/addUser`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            
+            if (data[0]=='Utilisateur ajouté avec succès') {
+                alert('Utilisateur ajouté avec succès');
+                fetchUsers(); // Rafraîchir la liste des utilisateurs
+            } else if (data.includes('Adresse email déjà utilisée')) {
+                alert('Adresse email déjà utilisée');
+            } else if (data.includes('Adresse email non valide')) {
+                alert('Adresse email non valide');
+            } else {
+                alert('Une erreur s\'est produite lors de l\'ajout de l\'utilisateur');
+            }
+        })
+        .catch(error => {
+            console.error('Error adding user:', error);
+        });
+}
+
+
+
+const addUserButton = document.getElementById('add-user-button');
+const addUserModal = document.getElementById('add-user-modal');
+const closeModalButton = document.getElementById('close-modal-button');
+const addUserForm = document.getElementById('add-user-form');
+
+// Afficher le formulaire modal
+addUserButton.addEventListener('click', () => {
+    addUserModal.classList.remove('hidden');
+});
+
+// Cacher le formulaire modal
+closeModalButton.addEventListener('click', () => {
+    addUserModal.classList.add('hidden');
+});
+
+// Soumettre le formulaire
+addUserForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!username || !email || !password) {
+        alert('Veuillez remplir tous les champs.');
+        return;
+    }
+
+    addUser(username, email, password); // Fonction d'ajout de l'utilisateur (à définir)
+    addUserModal.classList.add('hidden'); // Fermer le modal après soumission
+});
+
+
+
+
 });

@@ -73,3 +73,35 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 });
+
+
+
+
+function checkSessionCookie() {
+    let sessionCookie = document.cookie.split(';').some((item) => item.trim().startsWith('PHPSESSID='));
+    return sessionCookie;
+}
+
+// Function to show or hide the modal based on session cookie
+function handleSession() {
+    const modal = document.getElementById('login-modal');
+    const goBackBtn = document.getElementById('go-back-btn');
+
+    if (!checkSessionCookie()) {
+        modal.style.display = 'flex'; // Show modal if no session cookie
+    } else {
+        modal.style.display = 'none'; // Hide modal if session cookie is set
+    }
+
+    // Handle "Go Back" button click
+    goBackBtn.addEventListener('click', function() {
+        document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + window.location.hostname;
+        document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        window.history.back(); // Go back to the previous page
+    });
+}
+
+// Wait for the DOM to load before checking the session cookie
+document.addEventListener('DOMContentLoaded', function() {
+    handleSession();
+});

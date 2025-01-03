@@ -53,13 +53,18 @@
     outline: none;
 }
 
-#message {
+.succes {
     margin-top: 20px;
     font-size: 18px;
     color: green;
     font-weight: bold;
 }
-
+.error {
+    margin-top: 20px;
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+}
 
 
 

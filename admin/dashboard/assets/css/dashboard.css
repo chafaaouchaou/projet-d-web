@@ -51,8 +51,11 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
+    visibility: hidden;
 }
+
+
 
 ul {
     list-style-type: none;
@@ -80,4 +83,76 @@ li button {
 
 li button:hover {
     background-color: #999;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal-content label {
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ffffff;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.form-buttons button:first-child {
+    background-color: #28a745; /* Bouton Add */
+}
+
+.form-buttons button:first-child:hover {
+    background-color: #218838;
+}
+
+.form-buttons button:last-child {
+    background-color: #dc3545; /* Bouton Cancel */
+}
+
+.form-buttons button:last-child:hover {
+    background-color: #c82333;
 }
