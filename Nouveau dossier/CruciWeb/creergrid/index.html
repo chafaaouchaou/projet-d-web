@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Mots Croisés</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=1.2">
+    <link rel="stylesheet" href="../../global.css?v=1">
+    <link rel="stylesheet" href="../../normalize.css">
+</head>
+<body>
+    <nav>
+        <a href="/projet-d-web/CruciWeb/games">New game</a>
+        <a href="/projet-d-web/CruciWeb/mygames">My games</a>
+        <a href="/projet-d-web/CruciWeb/profile">Profile</a>
+        <a href="/projet-d-web/CruciWeb/creergrid">Créer Gris</a>
+
+        <a href="/projet-d-web/CruciWeb/connection" id="login-link" class="hidden">Login</a>
+        <a href="/projet-d-web/CruciWeb/inscription" id="register-link" class="hidden">Register</a>
+        <a href="javascript:void(0);" id="logout-link" class="hidden" onclick="logout();">Logout</a>
+    </nav>
+
+    <h1 id="header">Créer un nouveau jeu de mots croisés</h1>
+    <p id="description">Remplissez les informations ci-dessous pour créer votre jeu.</p>
+
+    <div class="form-container">
+        <label for="game-name">Nom du jeu:</label>
+        <input class="input-form-grid" type="text" id="game-name" placeholder="Nom du jeu">
+
+        <label for="game-description">Description:</label>
+        <textarea class="input-form-grid" id="game-description" placeholder="Description du jeu"></textarea>
+
+        <label for="rows">Nombre de lignes:</label>
+        <input class="input-form-grid" type="number" id="rows" value="10" min="1">
+
+        <label for="cols">Nombre de colonnes:</label>
+        <input class="input-form-grid" type="number" id="cols" value="10" min="1">
+
+        <label for="difficulty">Niveau de difficulté:</label>
+        <select class="input-form-grid" id="difficulty">
+            <option value="débutant">Débutant</option>
+            <option value="intermédiaire">Intermédiaire</option>
+            <option value="expert">Expert</option>
+        </select>
+
+        <label for="horizontal-expression">Ajouter une expression horizontale:</label>
+        <input class="input-form-grid" type="text" id="horizontal-expression" placeholder="Expression horizontale">
+        <button id="add-horizontal">Ajouter</button>
+
+        <label for="vertical-expression">Ajouter une expression verticale:</label>
+        <input class="input-form-grid" type="text" id="vertical-expression" placeholder="Expression verticale">
+        <button id="add-vertical">Ajouter</button>
+    </div>
+
+    <div class="game-container">
+        <div class="leftside">
+            <div id="grid"></div>
+            <div class="button-container">
+                <button class="button" id="create" type="button">Créer</button>
+            </div>
+        </div>
+
+        <div class="expressions">
+            <h2>Expressions horizontales</h2>
+            <div id="horizontal-desc"></div>
+            <h2>Expressions verticales</h2>
+            <div id="vertical-desc"></div>
+        </div>
+    </div>
+
+    <div id="message"></div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Vous devez etre connecté pour acceder a cette page.</h2>
+            <button id="go-back-btn">Retour</button>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/script.js?v=2"></script>
+    <script src="../../global.js"></script>
+</body>
+</html>

@@ -1,42 +1,55 @@
 import API_BASE_URL from '../../../../config.js';
 
+class UserRegistration {
+    constructor() {
+        this.form = document.querySelector('form');
+        this.initialize();
+    }
 
-document.querySelector('form').addEventListener('submit', (event) => {
-    event.preventDefault(); // Empêche l'envoi du formulaire par défaut
+    initialize() {
+        this.form.addEventListener('submit', (event) => this.handleSubmit(event));
+    }
 
-    // Récupérer les valeurs des champs
-    const inputs = document.querySelectorAll('input');
-    const [nom, prenom, email, motDePasse] = Array.from(inputs).map(input => input.value);
+    async handleSubmit(event) {
+        event.preventDefault();
 
-    // Créer l'objet à envoyer
-    const data = {
-        username: `${nom}${prenom}`, // Concaténation du nom et du prénom
-        email: email,
-        password: motDePasse
-    };
+        const userData = this.getUserData();
+        
+        try {
+            await this.registerUser(userData);
+        } catch (error) {
+            console.error('Erreur lors de la requête:', error);
+            alert('Une erreur est survenue lors de linscription.');
+        }
+    }
 
-    // Envoyer la requête POST
-    fetch(`${API_BASE_URL}/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // Spécifie le format JSON
-        },
-        body: JSON.stringify(data) // Convertit l'objet en chaîne JSON
-    })
-    .then(response => {
+    getUserData() {
+        const [nom, prenom, email, motDePasse] = Array.from(document.querySelectorAll('input'))
+            .map(input => input.value);
+
+        return {
+            username: `${nom}${prenom}`,
+            email,
+            password: motDePasse
+        };
+    }
+
+    async registerUser(userData) {
+        const response = await fetch(`${API_BASE_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        });
+
         if (!response.ok) {
             throw new Error(`Erreur: ${response.statusText}`);
         }
-        return response.json();
-    })
-    .then(result => {
-        // console.log(result); // Affiche le retour dans la console
-        alert(result.succes); // Message utilisateur
-        window.location.href = '/projet-d-web/CruciWeb/connection';
 
-    })
-    .catch(error => {
-        console.error('Erreur lors de la requête:', error);
-        alert('Une erreur est survenue lors de l’inscription.');
-    });
-});
+        const result = await response.json();
+        alert(result.succes);
+        window.location.href = '/projet-d-web/CruciWeb/connection';
+    }
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => new UserRegistration());

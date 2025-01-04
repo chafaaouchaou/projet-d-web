@@ -1,172 +1,98 @@
-
 import API_BASE_URL from '../../../../config.js';
 
+class GamesManager {
+    constructor() {
+        this.gamesContainer = document.getElementById("games-container");
+        this.levelSelect = document.getElementById("level-select");
+        this.dateSelect = document.getElementById("date-select");
+        
+        this.bindEvents();
+        this.loadInitialGames();
+    }
 
+    bindEvents() {
+        this.levelSelect?.addEventListener("change", () => this.handleFilterGames());
+        this.dateSelect?.addEventListener("change", () => this.handleFilterGames());
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const gamesContainer = document.getElementById("games-container");
-
-    fetch(`${API_BASE_URL}/games`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok: " + response.statusText);
-            }
-            
-            return response.json();
-        })
-        .then(games => {
-            
-            gamesContainer.innerHTML = ""; // Clear loading message
-            console.log(games);
-            
-            games.forEach(game => {
-                // Create the game container
-                const gameDiv = document.createElement("div");
-                gameDiv.classList.add("game");
-                gameDiv.dataset.id = game.id; // Store the game ID as a dataset attribute
-            
-                // Create and add the image
-                const gameImage = document.createElement("img");
-                gameImage.src = "assets/images/card-image.png";
-                gameImage.alt = `${game.name} Image`;
-            
-                // Create and add the title
-                const gameTitle = document.createElement("h2");
-                gameTitle.textContent = game.name;
-            
-                // Create and add the description
-                const gameDescription = document.createElement("p");
-                gameDescription.textContent = game.description;
-            
-                // Append elements to the game container
-                gameDiv.appendChild(gameImage);
-                const gametext = document.createElement("div");
-                
-                gametext.appendChild(gameTitle);
-                gametext.appendChild(gameDescription);
-                gameDiv.appendChild(gametext);
-                gametext.classList.add("gametext");
-                // Add click event to redirect to game page
-                gameDiv.addEventListener("click", () => {
-                    const gameId = gameDiv.dataset.id;
-                    window.location.href = `/projet-d-web/CruciWeb/game?id=${gameId}`;
-                });
-            
-                // Append the game container to the grid
-                gamesContainer.appendChild(gameDiv);
-            });
-            
-        })
-        .catch(error => {
-            gamesContainer.innerHTML = `<p>Error loading games: ${error.message}</p>`;
-        });
-});
-
-// //////////////////////////////////////
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     const levelSelect = document.getElementById("level-select");
-//     const dateSelect = document.getElementById("date-select");
-
-//     levelSelect.addEventListener("change", () => {
-//         console.log("Level Filter Selected:", levelSelect.value);
-//     });
-
-//     dateSelect.addEventListener("change", () => {
-//         console.log("Date Filter Selected:", dateSelect.value);
-//     });
-// });
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const levelSelect = document.getElementById("level-select");
-    const dateSelect = document.getElementById("date-select");
-    const gamesContainer = document.getElementById("games-container");
-
-    // Fonction pour filtrer les jeux
-    const handleFilterGames = () => {
-        // Récupérer les valeurs des filtres
-        const niveau_difficulte = levelSelect.value;
-        const date_de_creation = dateSelect.value;
-
-        // Construire l'URL de la requête API avec les filtres
-        let url = "http://localhost/projet-d-web/api/games/filtered?";
-        const params = [];
-
-        if (niveau_difficulte) {
-            params.push(`niveau_difficulte=${niveau_difficulte}`);
+    async loadInitialGames() {
+        try {
+            const games = await this.fetchGames(`${API_BASE_URL}/games`);
+            this.renderGames(games);
+        } catch (error) {
+            this.showError(error);
         }
-        if (date_de_creation) {
-            params.push(`date_de_creation=${date_de_creation}`);
-        }
+    }
 
+    async handleFilterGames() {
+        try {
+            const url = this.buildFilterUrl();
+            const games = await this.fetchGames(url);
+            this.renderGames(games);
+        } catch (error) {
+            this.showError(error);
+        }
+    }
+
+    buildFilterUrl() {
+        const params = new URLSearchParams();
+        
+        if (this.levelSelect?.value) {
+            params.append('niveau_difficulte', this.levelSelect.value);
+        }
+        if (this.dateSelect?.value) {
+            params.append('date_de_creation', this.dateSelect.value);
+        }
+        
         // Ajouter un timestamp pour éviter le cache
-        params.push(`_=${new Date().getTime()}`);
+        params.append('_', new Date().getTime());
 
-        // Ajouter les paramètres à l'URL
-        url += params.join("&");
+        return `${API_BASE_URL}/games/filtered?${params.toString()}`;
+    }
 
-        // Effectuer la requête API avec l'URL mise à jour
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok: " + response.statusText);
-                }
-                return response.json();
-            })
-            .then(games => {
-                // Mettre à jour l'affichage des jeux
-                gamesContainer.innerHTML = ""; // Effacer le contenu précédent
-                console.log(games);
+    async fetchGames(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    }
 
-                games.forEach(game => {
-                    // Créer le conteneur du jeu
-                    const gameDiv = document.createElement("div");
-                    gameDiv.classList.add("game");
-                    gameDiv.dataset.id = game.id; // Stocker l'ID du jeu comme attribut de dataset
+    renderGames(games) {
+        this.gamesContainer.innerHTML = "";
+        games.forEach(game => this.createGameCard(game));
+    }
 
-                    // Créer et ajouter l'image
-                    const gameImage = document.createElement("img");
-                    gameImage.src = "assets/images/card-image.png";
-                    gameImage.alt = `${game.name} Image`;
+    createGameCard(game) {
+        const gameCard = document.createElement('div');
+        gameCard.className = 'game';
+        gameCard.dataset.id = game.id;
 
-                    // Créer et ajouter le titre
-                    const gameTitle = document.createElement("h2");
-                    gameTitle.textContent = game.name;
+        const gameContent = `
+            <img src="assets/images/card-image.png" alt="${game.name} Image">
+            <div class="gametext">
+                <h2>${game.name}</h2>
+                <p>${game.description}</p>
+            </div>
+        `;
 
-                    // Créer et ajouter la description
-                    const gameDescription = document.createElement("p");
-                    gameDescription.textContent = game.description;
+        gameCard.innerHTML = gameContent;
+        gameCard.addEventListener('click', () => this.navigateToGame(game.id));
+        
+        this.gamesContainer.appendChild(gameCard);
+    }
 
-                    // Ajouter les éléments au conteneur du jeu
-                    gameDiv.appendChild(gameImage);
-                    const gametext = document.createElement("div");
+    navigateToGame(gameId) {
+        window.location.href = `/projet-d-web/CruciWeb/game?id=${gameId}`;
+    }
 
-                    gametext.appendChild(gameTitle);
-                    gametext.appendChild(gameDescription);
-                    gameDiv.appendChild(gametext);
-                    gametext.classList.add("gametext");
+    showError(error) {
+        console.error('Error:', error);
+        this.gamesContainer.innerHTML = `
+            <p>Error loading games: ${error.message}</p>
+        `;
+    }
+}
 
-                    // Ajouter un événement au clic pour rediriger vers la page du jeu
-                    gameDiv.addEventListener("click", () => {
-                        const gameId = gameDiv.dataset.id;
-                        window.location.href = `/projet-d-web/CruciWeb/game?id=${gameId}`;
-                    });
-
-                    // Ajouter le conteneur du jeu au grid
-                    gamesContainer.appendChild(gameDiv);
-                });
-            })
-            .catch(error => {
-                gamesContainer.innerHTML = `<p>Error loading games: ${error.message}</p>`;
-            });
-    };
-
-    // Ajouter les écouteurs d'événements pour les changements de filtres
-    levelSelect.addEventListener("change", handleFilterGames);
-    dateSelect.addEventListener("change", handleFilterGames);
-});
-
-
-// Ce lien est bien : 
-// http://localhost/projet-d-web/api/games/filtered?niveau_difficulte=d%C3%A9butant&_=1735937173977
+// Initialize the manager when the DOM is loaded
+document.addEventListener("DOMContentLoaded", () => new GamesManager());
