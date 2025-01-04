@@ -1,8 +1,28 @@
 # Installation et Configuration du Projet
 
-## 1. Déplacement du Dossier du Projet
+## 0. Déplacement du Dossier du Projet
 Placez le dossier **projet-d-web** dans le répertoire suivant :  
 `/var/www/html/`
+
+---
+
+## 1. Configuration du Projet
+Si vous avez besoin de changer les paramètres de l'application web :
+
+### 1. Paramètres de connexion à la base de données
+- si vous utilisez une base de données defférente de celle de la notice `projet`
+- Modifiez le fichier : `config/connectDB.php`.
+
+#### remarque
+Si vous changez ces informations, adaptez les instructions de configuration de la base de données qui suivent.
+
+### 2. Adresse IP de l'hôte
+- Si l'adresse IP d'hébergement de l'application est différente de `192.168.76.76`, effectuez les modifications dans les fichiers suivants :
+  - `config.js`
+  - `global.js`
+- Remplacez `192.168.76.76` par la nouvelle adresse IP.
+
+
 
 ---
 
@@ -25,6 +45,10 @@ Placez le dossier **projet-d-web** dans le répertoire suivant :
    SOURCE /var/www/html/projet-d-web/projet.sql;
    ```
 
+4. Déconecter vous de la base de données : 
+   ```sql
+   exit
+   ```
 ---
 
 ## 3. Configuration d'Apache
@@ -36,7 +60,7 @@ Placez le dossier **projet-d-web** dans le répertoire suivant :
    ```
    **Mot de passe** : `rotomagus`
 
-2. Modifiez le fichier de configuration :  
+2. Modifiez le fichier de configuration 000-default.conf :  
    ```bash
    nano /etc/apache2/sites-available/000-default.conf
    ```

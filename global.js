@@ -1,4 +1,6 @@
 
+const API_BASE_URL = "http://localhost/projet-d-web/api";
+
 // Fonction pour vérifier si un cookie PHPSESSID existe
 function checkSession() {
     // Vérifier si le cookie PHPSESSID est présent
@@ -22,7 +24,7 @@ function logout() {
 
 
         // Effectuer une requête POST pour la déconnexion
-        fetch('http://localhost/projet-d-web/api/logout', {
+        fetch(`${API_BASE_URL}/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
