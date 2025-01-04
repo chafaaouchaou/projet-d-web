@@ -53,12 +53,12 @@
     outline: none;
 }
 
-#message {
+/* #message {
     margin-top: 20px;
     font-size: 18px;
     color: green;
     font-weight: bold;
-}
+} */
 
 
 
@@ -94,4 +94,18 @@
 body{
     max-width: 1200px;
     padding: 0 12rem;
+}
+
+
+.succes {
+    margin-top: 20px;
+    font-size: 18px;
+    color: green;
+    font-weight: bold;
+}
+.error {
+    margin-top: 20px;
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
 }

@@ -56,8 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector('#validate').addEventListener('click', function () {
         const isComplete = checkGrid(solutionGrid, playerGrid, messageContainer, rows, cols);
         if (isComplete) {
+            messageContainer.classList.add('succes');
+            messageContainer.classList.remove('error');
             messageContainer.textContent = 'Félicitations, vous avez complété la grille ! 🎉';
         } else {
+            messageContainer.classList.remove('succes');
+            messageContainer.classList.add('error');
             messageContainer.textContent = 'La solution n\'est pas encore correcte.';
         }
     });
@@ -75,13 +79,19 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.succes) {
+                    messageContainer.classList.add('succes');
+                    messageContainer.classList.remove('error');
                     messageContainer.textContent = data.succes;
                 } else {
+                    messageContainer.classList.remove('succes');
+                    messageContainer.classList.add('error');
                     messageContainer.textContent = 'Erreur lors de la sauvegarde de la grille.';
                 }
             })
             .catch(error => {
                 console.error('Erreur:', error);
+                messageContainer.classList.remove('succes');
+                messageContainer.classList.add('error');
                 messageContainer.textContent = 'Erreur lors de la sauvegarde de la grille.';
             });
     });

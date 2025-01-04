@@ -48,7 +48,11 @@ CREATE TABLE `grids` (
 
 INSERT INTO `grids` (`id`, `description`, `nom`, `niveau_difficulte`, `nbr_lignes`, `nbr_colonnes`, `def_horizontales`, `def_verticales`, `cases_noire`, `solutions`, `id_utilisateur`, `date_de_creation`) VALUES
 (58, 'test', 'test', 'expert', 10, 10, 'Les outils des astronomes,Louis XIV selon Louis XIV - Chasseur équatorial,Que ce soit le dieu ou le métal il irradie - Sam ou Tom,Porteuse de messages célestes - A une liaison avec Jupiter,Aurochs - Bout de bois,Court - Religieuse,À la mode - Technique utilisée par les virtuoses de limagerie électronique,Petits ensembles battus dune tête par celui de Stephan,Local industriel,On les trouve surtout dans le nord de lItalie', 'Telle notre bonne vieille planète,Les astronomes sont toujours à sa recherche - Le cadeau dHerschel,Brouillent la vision - Odeur méridionale,Pour éviter que le ciel ne nous tombe sur la tête - En Moravie,Article,Boréale,australe ou solaire,Décoreront,Celui du Midi est un haut lieu de lastronomie française,Aux quatre coins de la rose - Un gamin vraiment désordonné', '1,4 2,1 2,4 3,7 4,4 4,9 5,3 5,4 6,2 8,5 8,6 8,8 9,1', 'TELESCOPESETAT■ORIONL■RA■UNCLELUMIERE■IOURES■NONNERAS■■NONNEIN■BINNINGQUARTETTESUSINE■■E■OELLOMBARDS', 2, '2024-12-21 13:42:54'),
-(66, 'test4', 'test4', 'débutant', 2, 2, 'A,B', 'A,B', '1,1', '■ABC', 2, '2024-12-22 11:59:08');
+(66, 'test4', 'test4', 'débutant', 2, 2, 'A,B', 'A,B', '1,1', '■ABC', 2, '2024-12-22 11:59:08'),
+(67, 'Players', 'Players', 'débutant', 2, 2, 'A,B', 'A,B', '1,1', '■ABC', 2, '2024-12-22 11:59:08'),
+(68, 'pays', 'pays', 'débutant', 2, 2, 'A,B', 'A,B', '1,1', '■ABC', 2, '2024-12-22 11:59:08'),
+(69, 'fruits', 'fruits', 'débutant', 2, 2, 'A,B', 'A,B', '1,1', '■ABC', 2, '2024-12-22 11:59:08'),
+(70, 'verry good game', 'Game', 'expert', 10, 10, 'Les outils des astronomes,Louis XIV selon Louis XIV - Chasseur équatorial,Que ce soit le dieu ou le métal il irradie - Sam ou Tom,Porteuse de messages célestes - A une liaison avec Jupiter,Aurochs - Bout de bois,Court - Religieuse,À la mode - Technique utilisée par les virtuoses de limagerie électronique,Petits ensembles battus dune tête par celui de Stephan,Local industriel,On les trouve surtout dans le nord de lItalie', 'Telle notre bonne vieille planète,Les astronomes sont toujours à sa recherche - Le cadeau dHerschel,Brouillent la vision - Odeur méridionale,Pour éviter que le ciel ne nous tombe sur la tête - En Moravie,Article,Boréale,australe ou solaire,Décoreront,Celui du Midi est un haut lieu de lastronomie française,Aux quatre coins de la rose - Un gamin vraiment désordonné', '1,4 2,1 2,4 3,7 4,4 4,9 5,3 5,4 6,2 8,5 8,6 8,8 9,1', 'TELESCOPESETAT■ORIONL■RA■UNCLELUMIERE■IOURES■NONNERAS■■NONNEIN■BINNINGQUARTETTESUSINE■■E■OELLOMBARDS', 2, '2024-12-21 13:42:54');
 
 -- --------------------------------------------------------
 
@@ -94,7 +98,11 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
 (2, 'user', 'hdh@gmail.com', '$2y$10$ZF4dHaeJ3tb.EVyxQctYvOX/RpPugLalgkAktvo2XJ5VqzL2rAUSm', 'user'),
 (3, 'cel', 'fgcl@gmail.com', '$2y$10$IJZ.vMqxCj73/Gea.FeVfOKJRcB3z7nKJ2AhYqL4R8vCloodQJsta', 'user'),
 (4, 'admin', 'admin@gmail.com', '$2y$10$iTHUl0mCdz4AuS3MRF1dYO2ow9Ruc3v5Tzf2bCKPIOxx5xd6mxfn.', 'admin'),
-(5, 'test', 'test@gmail.com', '$2y$10$3gu3uJcym1XBiDmTKfUCeOP/k.hS61f7zCuFVm4stlb0a1nfEdARK', 'user');
+(5, 'test', 'test@gmail.com', '$2y$10$3gu3uJcym1XBiDmTKfUCeOP/k.hS61f7zCuFVm4stlb0a1nfEdARK', 'user'),
+(6, 'dddddd', 'chafaaouchaou@proton.me', '$2y$12$0e3PfKvcCfknpJ2S52RGQebc0lAYcmMMFA967eeh/VVwrsWL8TLD2', 'user');
+
+
+
 
 --
 -- Index pour les tables déchargées
