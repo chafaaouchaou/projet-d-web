@@ -1,0 +1,52 @@
+connect as root
+CREATE DATABASE projet;
+CREATE USER 'projet'@'localhost' IDENTIFIED BY 'tejorp';
+GRANT ALL PRIVILEGES ON projet.* TO 'projet'@'localhost' 
+FLUSH PRIVILEGES;
+
+mysql -u projet -p 
+password = tejorp
+USE projet;
+
+SOURCE /var/www/html/projet-d-web/projet.sql
+
+SHOW TABLES;
+
+
+SOURCE C:\Apache24\htdocs\projet-d-web\projet.sql
+
+
+
+
+1- mettre le dossier projet-d-web du projet dans /var/www/html/
+2- Configuration de la base de données
+a- se connecter en temp que l'utilisateur projet : mysql -u projet -p 
+b- password = tejorp
+c- USE projet;
+d- SOURCE /var/www/html/projet-d-web/projet.sql
+3- Configuration de apach
+a- se connecter en temp que root : su - ; password = rotomagus
+b- acceder au fichier 000-default.conf : nano /etc/apache2/sites-available/000-default.conf
+c- suprimer son contenue et le remplacer  avec le code suivant:
+
+<VirtualHost *:80>
+    DocumentRoot /var/www/html
+
+    <Directory /var/www/html>
+        AllowOverride All
+        Require all granted
+        Options Indexes FollowSymLinks MultiViews
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+d- sauvgarder le fichier cntr + O , Entré , cntr + X
+e- Executer les deux commande suivante :
+
+e1- a2enmod rewrite
+e2- systemctl restart apache2
+
+
+
