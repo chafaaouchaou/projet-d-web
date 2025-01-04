@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let solutionGrid = [];
-    const playerGrid = Array.from({ length: 10 }, () => Array(10).fill('')); // Grille du joueur vide
+    let playerGrid = []; // Grille du joueur initialisée dynamiquement
     const gridContainer = document.getElementById('grid');
     const messageContainer = document.getElementById('message');
     let rows, cols, gridId;
@@ -19,11 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(`${API_BASE_URL}/getSavedGame/${savedGameId}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             const concatenatedGrid = data.solutions;
             rows = data.nbr_lignes;
             cols = data.nbr_colonnes;
             gridId = data.grid_id; // Utiliser grid_id pour les opérations de sauvegarde
             const partialSolution = data.solution_partielle.split(',');
+            console.log("Partial solution:", partialSolution);
+
+            // Dynamically initialize playerGrid to match rows and cols
+            playerGrid.length = 0;
+            for (let i = 0; i < rows; i++) {
+                playerGrid.push(Array(cols).fill(''));
+            }
 
             // Mettre à jour la taille de la grille (lignes et colonnes) dynamiquement
             gridContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;  // Ajuste le nombre de colonnes
@@ -34,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const row = concatenatedGrid.slice(i * cols, (i + 1) * cols).split('');
                 solutionGrid.push(row);
             }
+            console.log("Solution grid:", solutionGrid);
 
             // Générer et afficher la grille
             generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer, rows, cols, partialSolution);
@@ -121,7 +130,7 @@ function generateGrid(solutionGrid, gridContainer, playerGrid, messageContainer,
 
                 // Pré-remplir avec la solution partielle
                 const partialChar = partialSolution[rowIndex * cols + colIndex];
-                if (partialChar && partialChar !== '') {
+                if (partialChar && partialChar.trim() !== '') {
                     input.value = partialChar;
                     playerGrid[rowIndex][colIndex] = partialChar;
                 }

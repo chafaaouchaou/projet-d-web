@@ -91,7 +91,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
 (1, 'Celina8', 'cel@gmail.com', '$2y$10$aa69lW.kVM.bvOkFBCJfW.WzbyW8v0Ls3hE7atvGA8g9M9IC/bc0u', 'user'),
-(2, 'useer', 'hdh@gmail.com', '$2y$10$ZF4dHaeJ3tb.EVyxQctYvOX/RpPugLalgkAktvo2XJ5VqzL2rAUSm', 'user'),
+(2, 'user', 'hdh@gmail.com', '$2y$10$ZF4dHaeJ3tb.EVyxQctYvOX/RpPugLalgkAktvo2XJ5VqzL2rAUSm', 'user'),
 (3, 'cel', 'fgcl@gmail.com', '$2y$10$IJZ.vMqxCj73/Gea.FeVfOKJRcB3z7nKJ2AhYqL4R8vCloodQJsta', 'user'),
 (4, 'admin', 'admin@gmail.com', '$2y$10$iTHUl0mCdz4AuS3MRF1dYO2ow9Ruc3v5Tzf2bCKPIOxx5xd6mxfn.', 'admin'),
 (5, 'test', 'test@gmail.com', '$2y$10$3gu3uJcym1XBiDmTKfUCeOP/k.hS61f7zCuFVm4stlb0a1nfEdARK', 'user');
