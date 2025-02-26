@@ -21,7 +21,7 @@ class SavedGamesManager {
             this.setupDeleteButtons();
         } catch (error) {
             console.error('Error fetching games:', error);
-            this.showError('Error loading saved games');
+            // this.showError('Error loading saved games');
         }
     }
 

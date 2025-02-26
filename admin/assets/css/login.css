@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .login-container {
@@ -13,6 +14,17 @@
     width: 300px;
     text-align: center;
     margin-top: 7rem;
+}
+
+
+.login-container-no-mg{
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    text-align: center;
+    margin-top: 2rem;
 }
 
 h1 {

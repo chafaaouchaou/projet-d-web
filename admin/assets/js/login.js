@@ -20,6 +20,8 @@ class LoginHandler {
             email: this.emailInput.value,
             password: this.passwordInput.value
         };
+        console.log("hello world !");
+        
 
         try {
             const response = await this.login(credentials);

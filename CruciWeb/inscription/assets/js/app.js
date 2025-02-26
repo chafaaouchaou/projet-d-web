@@ -15,6 +15,7 @@ class UserRegistration {
 
         const userData = this.getUserData();
         
+        
         try {
             await this.registerUser(userData);
         } catch (error) {

@@ -2,9 +2,9 @@
 
 class Database{
     private $host = 'localhost';
-    private $username = 'projet'; // private $username = 'projet'
+    private $username = 'tejorp';
     private $dbname = 'projet';
-    private $mdp = 'tejorp';
+    private $mdp = 'Fleshed7-Starring0-Catalyst5-Lining0-Enduring3';
     public $pdo;
 
     public function __construct()
@@ -28,5 +28,4 @@ class Database{
 
 }
 
-// $connection = new Database();
 ?>
