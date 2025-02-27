@@ -53,6 +53,10 @@ If you change these details, adjust the following database configuration instruc
    ```
 
 ---
+🌐 Live demo: [https://cruciweb.chafaaouchaou.online/projet-d-web/CruciWeb/games/](https://cruciweb.chafaaouchaou.online/projet-d-web/CruciWeb/games/)
+
+
+
 
 ## 3. Apache Configuration
 

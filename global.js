@@ -1,5 +1,5 @@
 
-const API_BASE_URL = "http://localhost/projet-d-web/api";
+const API_BASE_URL = "https://cruciweb.chafaaouchaou.online/projet-d-web/api";
 
 // Fonction pour vérifier si un cookie PHPSESSID existe
 function checkSession() {
